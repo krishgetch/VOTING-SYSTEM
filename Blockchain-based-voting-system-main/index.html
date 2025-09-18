@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Based Voting System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" id="login-page">
+        <h2>Blockchain Based Voting System</h2>
+        <div class="box">
+            <h3>Login</h3>
+            <input type="text" placeholder="Voter ID" id="voterId">
+            <input type="password" placeholder="Password" id="password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <div class="container" id="admin-page" style="display: none;">
+        <h2>Admin Panel</h2>
+        <div class="box">
+            <h3>Add Candidate</h3>
+            <input type="text" placeholder="Name" id="candidateName">
+            <input type="text" placeholder="Party" id="candidateParty">
+            <button onclick="addCandidate()">Add Candidate</button>
+        </div>
+        <div class="box">
+            <h3>Define Voting Dates</h3>
+            <input type="date" id="startDate">
+            <input type="date" id="endDate">
+            <button onclick="setVotingDates()">Define Dates</button>
+        </div>
+    </div>
+
+    <div class="container" id="voting-page" style="display: none;">
+        <h2>Welcome for Voting</h2>
+        <p id="voting-dates">Voting Dates: TBD</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Party</th>
+                    <th>Total Votes</th>
+                    <th>Vote</th>
+                </tr>
+            </thead>
+            <tbody id="candidates-list"></tbody>
+        </table>
+        <button onclick="showResults()">Show Results</button>
+    </div>
+
+    <div class="container" id="results-page" style="display: none;">
+        <h2>Voting Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Party</th>
+                    <th>Total Votes</th>
+                </tr>
+            </thead>
+            <tbody id="results-list"></tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Decentralized Voting System. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

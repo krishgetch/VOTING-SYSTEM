@@ -1,0 +1,88 @@
+// script.js
+
+let candidates = [
+    { name: "James Patterson", party: "Democratic", votes: 5 },
+    { name: "Bob Smith", party: "Liberty", votes: 4 },
+    { name: "Charlie Brown", party: "Independent", votes: 10 },
+    { name: "Diana Prince", party: "Green", votes: 5 }
+];
+
+function login() {
+    let voterId = document.getElementById('voterId').value;
+    let password = document.getElementById('password').value;
+
+    if (voterId === "admin" && password === "admin123") {
+        document.getElementById("login-page").style.display = "none";
+        document.getElementById("admin-page").style.display = "block";
+    } else if (voterId !== "" && password !== "") {
+        document.getElementById("login-page").style.display = "none";
+        document.getElementById("voting-page").style.display = "block";
+        loadCandidates();
+    } else {
+        alert("Invalid credentials!");
+    }
+}
+
+function addCandidate() {
+    let name = document.getElementById("candidateName").value;
+    let party = document.getElementById("candidateParty").value;
+
+    if (name && party) {
+        candidates.push({ name, party, votes: 12 });
+        alert("Candidate added!");
+        document.getElementById("candidateName").value = "";
+        document.getElementById("candidateParty").value = "";
+    } else {
+        alert("Please enter candidate details!");
+    }
+}
+
+function setVotingDates() {
+    let start = document.getElementById("startDate").value;
+    let end = document.getElementById("endDate").value;
+
+    if (start && end) {
+        document.getElementById("voting-dates").innerText = `Voting Dates: ${start} - ${end}`;
+        alert("Voting dates set!");
+
+        document.getElementById("admin-page").style.display = "none";
+        document.getElementById("voting-page").style.display = "block";
+        loadCandidates();
+    } else {
+        alert("Please select valid dates!");
+    }
+}
+
+function loadCandidates() {
+    let table = document.getElementById("candidates-list");
+    table.innerHTML = "";
+
+    candidates.forEach((candidate, index) => {
+        let row = table.insertRow();
+        row.innerHTML = `<td>${candidate.name}</td>
+                         <td>${candidate.party}</td>
+                         <td id="votes-${index}">${candidate.votes}</td>
+                         <td><button onclick="vote(${index})">Vote</button></td>`;
+    });
+}
+
+function vote(index) {
+    candidates[index].votes++;
+    document.getElementById(`votes-${index}`).innerText = candidates[index].votes;
+    alert("Vote recorded!");
+}
+
+function showResults() {
+    document.getElementById("voting-page").style.display = "none";
+    document.getElementById("results-page").style.display = "block";
+
+    let table = document.getElementById("results-list");
+    table.innerHTML = "";
+
+    candidates.forEach((candidate) => {
+        let row = table.insertRow();
+        row.innerHTML = `<td>${candidate.name}</td>
+                         <td>${candidate.party}</td>
+                         <td>${candidate.votes}</td>`;
+    });
+}
